@@ -1,26 +1,21 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="bg-neutral-very-dark-blue h-full w-full flex items-center justify-center p-6 md:p-0">
+    <rating-votes v-if="selected === 0" @selected="(val) => selected = val" />
+    <rating-result v-else :rate="selected" />
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import { ref } from 'vue'
+import RatingVotes from './components/Rating/RatingVotes.vue'
+import RatingResult from './components/Rating/RatingResult.vue'
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+  components: { RatingVotes, RatingResult },
+  setup () {
+    const selected = ref(0)
+    return { selected }
   }
 }
 </script>
-
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
